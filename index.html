@@ -455,6 +455,166 @@ footer p { font-size:12px; color:var(--text3); }
 
 /* WA SVG snippet */
 svg.wa-ico { width:14px; height:14px; flex-shrink:0; }
+
+/* ─── FLOATING PLAN BUTTON ─── */
+.fab {
+  position:fixed; bottom:24px; right:20px; z-index:800;
+  display:flex; align-items:center; gap:9px;
+  padding:13px 20px; border-radius:var(--rmax);
+  background:var(--wa); color:#fff;
+  font-family:var(--ff); font-size:13px; font-weight:800; letter-spacing:-0.01em;
+  box-shadow:0 4px 24px rgba(37,211,102,0.35), 0 1px 4px rgba(0,0,0,0.4);
+  cursor:pointer; border:none;
+  transition:transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s;
+}
+.fab:hover { transform:scale(1.04) translateY(-2px); box-shadow:0 8px 32px rgba(37,211,102,0.45); }
+.fab-badge {
+  background:rgba(255,255,255,0.25); border-radius:var(--rmax);
+  padding:1px 7px; font-size:11px; font-weight:900; min-width:18px; text-align:center;
+  display:none;
+}
+.fab-badge.show { display:inline-block; }
+
+/* ─── FORM MODAL ─── */
+.fmodal-overlay {
+  position:fixed; inset:0; z-index:1100;
+  background:rgba(0,0,0,0.72); backdrop-filter:blur(8px);
+  opacity:0; pointer-events:none; transition:opacity 0.28s;
+}
+.fmodal-overlay.show { opacity:1; pointer-events:all; }
+
+.fmodal {
+  position:fixed; inset:0; z-index:1101;
+  display:flex; align-items:flex-end; justify-content:center;
+  pointer-events:none;
+}
+.fmodal-inner {
+  width:100%; max-width:560px;
+  background:var(--bg1);
+  border-radius:20px 20px 0 0;
+  border-top:1px solid var(--line2);
+  transform:translateY(100%);
+  transition:transform 0.38s cubic-bezier(0.4,0,0.2,1);
+  max-height:96svh; overflow-y:auto;
+  padding-bottom:32px;
+  pointer-events:all;
+}
+.fmodal-overlay.show ~ .fmodal .fmodal-inner { transform:translateY(0); }
+.fmodal.open .fmodal-inner { transform:translateY(0); }
+
+.fm-handle { width:36px; height:4px; border-radius:2px; background:var(--line2); margin:14px auto 0; }
+.fm-head { padding:20px 22px 0; display:flex; align-items:center; justify-content:space-between; }
+.fm-title { font-size:18px; font-weight:800; letter-spacing:-0.03em; }
+.fm-close { width:30px; height:30px; border-radius:50%; background:var(--bg2); color:var(--text2); display:flex; align-items:center; justify-content:center; font-size:18px; cursor:pointer; transition:background var(--ease); }
+.fm-close:hover { background:var(--bg3); }
+.fm-steps { display:flex; gap:4px; padding:16px 22px 0; }
+.fm-step-dot { flex:1; height:3px; border-radius:2px; background:var(--line2); transition:background 0.3s; }
+.fm-step-dot.done { background:var(--wa); }
+.fm-step-dot.active { background:var(--text2); }
+
+/* step pages */
+.fm-page { display:none; padding:20px 22px 0; }
+.fm-page.active { display:block; }
+.fm-label {
+  font-size:11px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;
+  color:var(--text3); margin-bottom:12px; display:flex; align-items:center; gap:8px;
+}
+.fm-label .step-num {
+  background:var(--bg3); color:var(--text2);
+  width:20px; height:20px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:10px; font-weight:800;
+}
+.fm-question { font-size:17px; font-weight:800; letter-spacing:-0.025em; margin-bottom:20px; }
+
+/* activity selector grid */
+.act-select-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:9px; margin-bottom:6px;
+}
+.act-chip {
+  display:flex; align-items:center; gap:10px;
+  padding:12px 14px; border-radius:var(--r8);
+  background:var(--bg2); border:1.5px solid var(--line);
+  cursor:pointer; transition:all 0.18s;
+  user-select:none;
+}
+.act-chip:hover { border-color:var(--line3); background:var(--bg3); }
+.act-chip.selected {
+  background:rgba(37,211,102,0.09);
+  border-color:rgba(37,211,102,0.45);
+}
+.ac-logo {
+  width:34px; height:34px; border-radius:50%;
+  background:#111; border:1px solid #2a2a2a;
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden; flex-shrink:0;
+}
+body.light .ac-logo { background:#e8e8e8; border-color:#ccc; }
+.ac-logo img { width:65%; height:65%; object-fit:contain; filter:brightness(0) invert(1); }
+body.light .ac-logo img { filter:brightness(0); }
+.ac-check {
+  width:16px; height:16px; border-radius:50%;
+  border:1.5px solid var(--line3);
+  display:flex; align-items:center; justify-content:center;
+  font-size:9px; color:transparent; flex-shrink:0;
+  margin-left:auto;
+  transition:all 0.18s;
+}
+.act-chip.selected .ac-check {
+  background:var(--wa); border-color:var(--wa); color:#fff;
+}
+.ac-name { font-size:12px; font-weight:700; letter-spacing:-0.01em; line-height:1.25; flex:1; min-width:0; }
+.ac-cat { font-size:10px; color:var(--text3); margin-top:1px; }
+
+/* text inputs */
+.fm-input {
+  width:100%; padding:13px 14px; border-radius:var(--r8);
+  background:var(--bg2); border:1.5px solid var(--line);
+  color:var(--text); font-family:var(--ff); font-size:14px;
+  outline:none; transition:border-color 0.18s;
+  appearance:none;
+}
+.fm-input:focus { border-color:var(--line3); }
+.fm-input::placeholder { color:var(--text3); }
+.fm-input-group { display:flex; flex-direction:column; gap:10px; margin-bottom:4px; }
+.fm-row2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.fm-input-label { font-size:12px; color:var(--text2); font-weight:600; margin-bottom:5px; display:block; }
+
+/* pax selector */
+.pax-row { display:flex; align-items:center; gap:16px; }
+.pax-btn { width:40px; height:40px; border-radius:50%; background:var(--bg2); border:1px solid var(--line2); font-size:20px; color:var(--text); display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0; transition:background var(--ease); }
+.pax-btn:hover { background:var(--bg3); }
+.pax-num { font-size:24px; font-weight:900; letter-spacing:-0.04em; min-width:32px; text-align:center; }
+
+/* summary card */
+.summary-card {
+  background:var(--bg2); border:1px solid var(--line);
+  border-radius:var(--r12); padding:18px; margin-bottom:14px;
+}
+.summary-title { font-size:11px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--text3); margin-bottom:14px; }
+.sum-row { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:6px 0; border-bottom:1px solid var(--line); font-size:13px; }
+.sum-row:last-child { border-bottom:none; padding-bottom:0; }
+.sum-key { color:var(--text2); }
+.sum-val { color:var(--text); font-weight:600; text-align:right; }
+.sum-acts { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+.sum-act-tag {
+  display:flex; align-items:center; gap:7px;
+  padding:5px 10px; border-radius:var(--rmax);
+  background:rgba(37,211,102,0.09); border:1px solid rgba(37,211,102,0.2);
+  font-size:11px; font-weight:700; color:var(--wa);
+}
+.sum-act-tag img { width:16px; height:16px; border-radius:50%; object-fit:contain; filter:brightness(0) invert(1); background:#111; }
+body.light .sum-act-tag img { filter:brightness(0); background:#e8e8e8; }
+
+/* nav buttons */
+.fm-nav { display:flex; gap:10px; padding:18px 22px 0; }
+.fm-back { padding:12px 18px; border-radius:var(--r8); background:var(--bg2); border:1px solid var(--line2); color:var(--text2); font-family:var(--ff); font-size:13px; font-weight:600; cursor:pointer; transition:background var(--ease), color var(--ease); }
+.fm-back:hover { background:var(--bg3); color:var(--text); }
+.fm-next { flex:1; padding:13px; border-radius:var(--r8); background:var(--text); color:var(--bg); font-family:var(--ff); font-size:14px; font-weight:800; letter-spacing:-0.01em; cursor:pointer; transition:opacity 0.18s, transform 0.18s; }
+.fm-next:hover { opacity:0.85; transform:translateY(-1px); }
+.fm-next:disabled { opacity:0.3; cursor:not-allowed; transform:none; }
+.fm-next.wa-send { background:#1a8c47; color:#fff; }
+.fm-note { font-size:11px; color:var(--text3); text-align:center; padding:10px 22px 0; line-height:1.6; }
 </style>
 </head>
 <body>
@@ -935,6 +1095,114 @@ svg.wa-ico { width:14px; height:14px; flex-shrink:0; }
 
 <div class="toast" id="toast"></div>
 
+<!-- ═══ FAB ═══ -->
+<button class="fab" onclick="openForm()" id="fab">
+  <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <span id="fab-label">Pedir plan</span>
+  <span class="fab-badge" id="fab-badge">0</span>
+</button>
+
+<!-- ═══ FORM MODAL ═══ -->
+<div class="fmodal-overlay" id="fmo" onclick="closeForm()"></div>
+<div class="fmodal" id="fmodal">
+<div class="fmodal-inner" id="fmodal-inner">
+  <div class="fm-handle"></div>
+  <div class="fm-head">
+    <div class="fm-title" id="fm-title">Tu plan en Mallorca</div>
+    <button class="fm-close" onclick="closeForm()">×</button>
+  </div>
+  <div class="fm-steps">
+    <div class="fm-step-dot active" id="fdot-0"></div>
+    <div class="fm-step-dot" id="fdot-1"></div>
+    <div class="fm-step-dot" id="fdot-2"></div>
+    <div class="fm-step-dot" id="fdot-3"></div>
+  </div>
+
+  <!-- PAGE 0: activities -->
+  <div class="fm-page active" id="fpage-0">
+    <div class="fm-label"><div class="step-num">1</div><span id="fl-act">Actividades</span></div>
+    <div class="fm-question" id="fq-act">¿Qué te interesa? Puedes elegir varias</div>
+    <div class="act-select-grid" id="act-grid"></div>
+    <div style="font-size:11px;color:var(--text3);margin-top:8px;padding:0 2px" id="fm-sel-hint">Selecciona todo lo que quieras</div>
+  </div>
+
+  <!-- PAGE 1: dates & people -->
+  <div class="fm-page" id="fpage-1">
+    <div class="fm-label"><div class="step-num">2</div><span id="fl-date">Fechas</span></div>
+    <div class="fm-question" id="fq-date">¿Cuándo y cuántos sois?</div>
+    <div class="fm-input-group">
+      <div>
+        <label class="fm-input-label" id="fl-arrival">Fecha de llegada</label>
+        <input type="date" class="fm-input" id="fi-arrival" style="color-scheme:dark">
+      </div>
+      <div>
+        <label class="fm-input-label" id="fl-nights">Noches en Mallorca</label>
+        <select class="fm-input" id="fi-nights">
+          <option value="">—</option>
+          <option value="1 noche">1 noche</option>
+          <option value="2 noches">2 noches</option>
+          <option value="3 noches">3 noches</option>
+          <option value="4–5 noches">4–5 noches</option>
+          <option value="6–7 noches">6–7 noches</option>
+          <option value="Más de 7 noches">Más de 7 noches</option>
+        </select>
+      </div>
+      <div>
+        <label class="fm-input-label" id="fl-pax">Número de personas</label>
+        <div class="pax-row">
+          <button class="pax-btn" onclick="changePax(-1)">−</button>
+          <span class="pax-num" id="pax-num">2</span>
+          <button class="pax-btn" onclick="changePax(1)">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 2: contact -->
+  <div class="fm-page" id="fpage-2">
+    <div class="fm-label"><div class="step-num">3</div><span id="fl-contact">Tus datos</span></div>
+    <div class="fm-question" id="fq-contact">Un poco más sobre tu viaje</div>
+    <div class="fm-input-group">
+      <div>
+        <label class="fm-input-label" id="fl-name">Tu nombre</label>
+        <input type="text" class="fm-input" id="fi-name" placeholder="Nombre" maxlength="40">
+      </div>
+      <div>
+        <label class="fm-input-label" id="fl-where">¿Dónde te alojas?</label>
+        <input type="text" class="fm-input" id="fi-where" placeholder="Hotel / zona / ciudad" maxlength="60">
+      </div>
+      <div>
+        <label class="fm-input-label" id="fl-car">¿Tenéis coche en Mallorca?</label>
+        <select class="fm-input" id="fi-car">
+          <option value="">—</option>
+          <option value="Sí, tienen coche">Sí</option>
+          <option value="No tienen coche">No</option>
+          <option value="Aún no lo saben">Aún no lo sé</option>
+        </select>
+      </div>
+      <div>
+        <label class="fm-input-label" id="fl-notes">Algo más que quieras contarnos</label>
+        <textarea class="fm-input" id="fi-notes" rows="3" placeholder="Presupuesto, preferencias, preguntas..." maxlength="200" style="resize:none;line-height:1.6"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 3: summary -->
+  <div class="fm-page" id="fpage-3">
+    <div class="fm-label"><div class="step-num">4</div><span id="fl-sum">Resumen</span></div>
+    <div class="fm-question" id="fq-sum">Tu solicitud lista para enviar</div>
+    <div class="summary-card" id="summary-content"></div>
+    <div style="font-size:12px;color:var(--text3);line-height:1.65;padding:0 2px" id="fm-sum-note">Se abrirá WhatsApp con este resumen. Nuestro equipo te responde en menos de 1h.</div>
+  </div>
+
+  <div class="fm-nav" id="fm-nav">
+    <button class="fm-back" id="fm-back-btn" onclick="formBack()" style="display:none">← Atrás</button>
+    <button class="fm-next" id="fm-next-btn" onclick="formNext()">Siguiente →</button>
+  </div>
+  <div class="fm-note" id="fm-note">Sin compromiso · Respuesta en menos de 1 hora</div>
+</div>
+</div>
+
 <script>
 /* ═══ LOGOS ═══ */
 const LOGOS = {
@@ -1139,9 +1407,207 @@ document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
 
 /* ═══ INIT ═══ */
 buildFaq(T.es.faqs);
-// init: show only first cat
 document.querySelectorAll('.catsec').forEach(s=>s.style.display='none');
 document.getElementById('cat-water').style.display='block';
+
+/* ═══════════════════════════════════════
+   BOOKING FORM
+═══════════════════════════════════════ */
+const WA_NUMBER = '34644075065';
+
+const FORM_ACTIVITIES = [
+  { id:'jetski',      name:'Jet Ski',           cat:'Agua',        logo: 'https://res.cloudinary.com/dxhef6dju/image/upload/v1774107976/5_d0638s.png' },
+  { id:'boat',        name:'Barco sin licencia', cat:'Agua',        logo: 'https://res.cloudinary.com/dxhef6dju/image/upload/v1774107984/8_mcruij.png' },
+  { id:'boatparty',   name:'Boat Party',         cat:'Agua',        logo: 'https://res.cloudinary.com/dxhef6dju/image/upload/v1774107976/5_d0638s.png' },
+  { id:'estrenc',     name:'Excursión Es Trenc', cat:'Playa',       logo: 'https://res.cloudinary.com/dxhef6dju/image/upload/v1774107976/5_d0638s.png' },
+  { id:'bcm',         name:'BCM Mallorca',       cat:'Nightlife',   logo: 'https://res.cloudinary.com/dxhef6dju/image/upload/v1774107967/3_x798fx.png' },
+  { id:'socialclub',  name:'Social Club',        cat:'Nightlife',   logo: 'https://res.cloudinary.com/dxhef6dju/image/upload/v1774107967/2_dwvgdf.png' },
+  { id:'mcp',         name:'MCP / Pub Crawl',    cat:'Nightlife',   logo: 'https://res.cloudinary.com/dxhef6dju/image/upload/v1774107966/1_scfycp.png' },
+  { id:'lounge',      name:'My Lounge',          cat:'Nightlife',   logo: 'https://res.cloudinary.com/dxhef6dju/image/upload/v1774108435/MY_LIUNGE_BAR_LOGO_p7aa5j.png' },
+  { id:'oceanbeach',  name:'Ocean Beach Club',   cat:'Playa & Dia', logo: 'https://res.cloudinary.com/dxhef6dju/image/upload/v1774107981/7_iqxwno.png' },
+  { id:'grandfolies', name:'Grand Folies',       cat:'Playa & Dia', logo: 'https://res.cloudinary.com/dxhef6dju/image/upload/v1774107981/7_iqxwno.png' },
+  { id:'barbuda',     name:'Brunch Barbuda',     cat:'Dia',         logo: 'https://res.cloudinary.com/dxhef6dju/image/upload/v1774107978/9_l7ileb.png' },
+  { id:'massimo',     name:'Massimo Pizza',      cat:'Restaurante', logo: 'https://res.cloudinary.com/dxhef6dju/image/upload/v1774107978/9_l7ileb.png' },
+];
+
+const FORM_I18N = {
+  es:{ title:'Tu plan en Mallorca', fl_act:'Actividades', fq_act:'Que te interesa? Puedes elegir varias', hint:'Selecciona todo lo que quieras', fl_date:'Fechas', fq_date:'Cuando y cuantos sois?', fl_arrival:'Fecha de llegada', fl_nights:'Noches en Mallorca', fl_pax:'Numero de personas', fl_contact:'Tus datos', fq_contact:'Un poco mas sobre tu viaje', fl_name:'Tu nombre', fl_where:'Donde te alojas?', fl_car:'Teneis coche en Mallorca?', fl_notes:'Algo mas que quieras contarnos', fl_sum:'Resumen', fq_sum:'Tu solicitud lista para enviar', sum_note:'Se abrira WhatsApp con este resumen. Nuestro equipo te responde en menos de 1h.', next:'Siguiente', back:'Atras', send:'Enviar por WhatsApp', fm_note:'Sin compromiso - Respuesta en menos de 1 hora', fab:'Pedir plan', pax_lbl:'personas', no_sel:'(no especificado)', sum_acts:'Actividades de interes', sum_arr:'Llegada', sum_nights:'Noches', sum_pax:'Personas', sum_name:'Nombre', sum_where:'Alojamiento', sum_car:'Coche', sum_notes:'Notas', wa_intro:'Hola! Me interesa organizar mi viaje en Mallorca. Aqui mi solicitud:', nights_opts:['','1 noche','2 noches','3 noches','4-5 noches','6-7 noches','Mas de 7 noches'], car_opts:['','Si, tenemos coche','No tenemos coche','Aun no lo se'] },
+  en:{ title:'Your Mallorca plan', fl_act:'Activities', fq_act:'What interests you? Choose as many as you like', hint:'You can select multiple options', fl_date:'Dates', fq_date:'When and how many of you?', fl_arrival:'Arrival date', fl_nights:'Nights in Mallorca', fl_pax:'Number of people', fl_contact:'Your details', fq_contact:'A bit more about your trip', fl_name:'Your name', fl_where:'Where are you staying?', fl_car:'Do you have a car in Mallorca?', fl_notes:'Anything else you want to tell us?', fl_sum:'Summary', fq_sum:'Your request ready to send', sum_note:'WhatsApp will open with this summary. Our team replies in under 1 hour.', next:'Next', back:'Back', send:'Send via WhatsApp', fm_note:'No commitment - Reply in under 1 hour', fab:'Get plan', pax_lbl:'people', no_sel:'(not specified)', sum_acts:'Activities of interest', sum_arr:'Arrival', sum_nights:'Nights', sum_pax:'People', sum_name:'Name', sum_where:'Accommodation', sum_car:'Car', sum_notes:'Notes', wa_intro:'Hi! I want to plan my Mallorca trip. Here is my request:', nights_opts:['','1 night','2 nights','3 nights','4-5 nights','6-7 nights','7+ nights'], car_opts:['','Yes, we have a car','No car','Not sure yet'] },
+  fr:{ title:'Votre plan a Majorque', fl_act:'Activites', fq_act:'Qu interest vous ? Choisissez plusieurs', hint:'Vous pouvez selectionner plusieurs options', fl_date:'Dates', fq_date:'Quand et combien de personnes ?', fl_arrival:'Date d arrivee', fl_nights:'Nuits a Majorque', fl_pax:'Nombre de personnes', fl_contact:'Vos coordonnees', fq_contact:'Un peu plus sur votre voyage', fl_name:'Votre prenom', fl_where:'Ou logez-vous ?', fl_car:'Avez-vous une voiture ?', fl_notes:'Autre chose a nous dire ?', fl_sum:'Resume', fq_sum:'Votre demande prete a envoyer', sum_note:'WhatsApp s ouvrira avec ce resume. Notre equipe repond en moins d 1h.', next:'Suivant', back:'Retour', send:'Envoyer via WhatsApp', fm_note:'Sans engagement - Reponse en moins d une heure', fab:'Mon plan', pax_lbl:'pers.', no_sel:'(non specifie)', sum_acts:'Activites souhaitees', sum_arr:'Arrivee', sum_nights:'Nuits', sum_pax:'Personnes', sum_name:'Prenom', sum_where:'Hebergement', sum_car:'Voiture', sum_notes:'Notes', wa_intro:'Bonjour ! Je souhaite organiser mon sejour a Majorque. Voici ma demande :', nights_opts:['','1 nuit','2 nuits','3 nuits','4-5 nuits','6-7 nuits','7+ nuits'], car_opts:['','Oui, voiture disponible','Pas de voiture','Je ne sais pas encore'] },
+  de:{ title:'Dein Mallorca-Plan', fl_act:'Aktivitaten', fq_act:'Was interessiert dich? Mehrere auswahlen', hint:'Du kannst mehrere Optionen wahlen', fl_date:'Reisedaten', fq_date:'Wann und wie viele seid ihr?', fl_arrival:'Anreisedatum', fl_nights:'Nachte auf Mallorca', fl_pax:'Personenzahl', fl_contact:'Deine Daten', fq_contact:'Noch etwas zu deiner Reise', fl_name:'Dein Name', fl_where:'Wo ubernachtest du?', fl_car:'Habt ihr ein Auto auf Mallorca?', fl_notes:'Noch etwas mitzuteilen?', fl_sum:'Zusammenfassung', fq_sum:'Deine Anfrage bereit zum Senden', sum_note:'WhatsApp offnet sich mit dieser Zusammenfassung. Unser Team antwortet in unter 1 Stunde.', next:'Weiter', back:'Zuruck', send:'Per WhatsApp senden', fm_note:'Unverbindlich - Antwort in unter 1 Stunde', fab:'Plan anfragen', pax_lbl:'Personen', no_sel:'(nicht angegeben)', sum_acts:'Gewunschte Aktivitaten', sum_arr:'Anreise', sum_nights:'Nachte', sum_pax:'Personen', sum_name:'Name', sum_where:'Unterkunft', sum_car:'Auto', sum_notes:'Anmerkungen', wa_intro:'Hallo! Ich mochte meine Mallorca-Reise planen. Hier meine Anfrage:', nights_opts:['','1 Nacht','2 Nachte','3 Nachte','4-5 Nachte','6-7 Nachte','7+ Nachte'], car_opts:['','Ja, wir haben ein Auto','Kein Auto','Noch nicht sicher'] },
+  it:{ title:'Il tuo piano a Maiorca', fl_act:'Attivita', fq_act:'Cosa ti interessa? Scegli piu opzioni', hint:'Puoi selezionare piu opzioni', fl_date:'Date', fq_date:'Quando e in quanti siete?', fl_arrival:'Data di arrivo', fl_nights:'Notti a Maiorca', fl_pax:'Numero di persone', fl_contact:'I tuoi dati', fq_contact:'Qualcosa in piu sul tuo viaggio', fl_name:'Il tuo nome', fl_where:'Dove alloggi?', fl_car:'Avete un auto a Maiorca?', fl_notes:'Qualcos altro che vuoi dirci?', fl_sum:'Riepilogo', fq_sum:'La tua richiesta pronta per l invio', sum_note:'WhatsApp si aprira con questo riepilogo. Il nostro team risponde in meno di 1 ora.', next:'Avanti', back:'Indietro', send:'Invia via WhatsApp', fm_note:'Senza impegno - Risposta in meno di 1 ora', fab:'Chiedi il piano', pax_lbl:'persone', no_sel:'(non specificato)', sum_acts:'Attivita di interesse', sum_arr:'Arrivo', sum_nights:'Notti', sum_pax:'Persone', sum_name:'Nome', sum_where:'Alloggio', sum_car:'Auto', sum_notes:'Note', wa_intro:'Ciao! Vorrei organizzare il mio viaggio a Maiorca. Ecco la mia richiesta:', nights_opts:['','1 notte','2 notti','3 notti','4-5 notti','6-7 notti','7+ notti'], car_opts:['','Si, abbiamo un auto','Nessuna auto','Non lo so ancora'] }
+};
+
+let fStep=0, fSelActs=new Set(), fPax=2;
+const TOTAL_STEPS=4;
+
+function buildActGrid(){
+  const grid=document.getElementById('act-grid');
+  grid.innerHTML='';
+  FORM_ACTIVITIES.forEach(a=>{
+    const chip=document.createElement('div');
+    chip.className='act-chip'+(fSelActs.has(a.id)?' selected':'');
+    chip.dataset.id=a.id;
+    chip.innerHTML='<div class="ac-logo"><img src="'+a.logo+'" alt="'+a.name+'"></div><div style="flex:1;min-width:0"><div class="ac-name">'+a.name+'</div><div class="ac-cat">'+a.cat+'</div></div><div class="ac-check">&#10003;</div>';
+    chip.onclick=()=>toggleAct(a.id,chip);
+    grid.appendChild(chip);
+  });
+}
+
+function toggleAct(id,chip){
+  if(fSelActs.has(id)){fSelActs.delete(id);chip.classList.remove('selected');}
+  else{fSelActs.add(id);chip.classList.add('selected');}
+  updateFabBadge();updateNextBtn();
+}
+
+function updateFabBadge(){
+  const b=document.getElementById('fab-badge'),n=fSelActs.size;
+  b.textContent=n;b.classList.toggle('show',n>0);
+}
+
+function updateNextBtn(){
+  const btn=document.getElementById('fm-next-btn');
+  btn.disabled=(fStep===0&&fSelActs.size===0);
+}
+
+function changePax(d){
+  fPax=Math.max(1,Math.min(30,fPax+d));
+  document.getElementById('pax-num').textContent=fPax;
+}
+
+function setFormStep(s){
+  fStep=s;
+  for(let i=0;i<TOTAL_STEPS;i++){
+    document.getElementById('fpage-'+i).classList.toggle('active',i===s);
+    const dot=document.getElementById('fdot-'+i);
+    dot.classList.remove('active','done');
+    if(i<s)dot.classList.add('done');
+    else if(i===s)dot.classList.add('active');
+  }
+  const fi=FORM_I18N[lang]||FORM_I18N.es;
+  const back=document.getElementById('fm-back-btn');
+  back.style.display=s>0?'block':'none';
+  back.textContent=fi.back;
+  const next=document.getElementById('fm-next-btn');
+  if(s===TOTAL_STEPS-1){next.textContent=fi.send;next.className='fm-next wa-send';next.disabled=false;}
+  else{next.textContent=fi.next;next.className='fm-next';updateNextBtn();}
+  if(s===TOTAL_STEPS-1)buildSummary();
+}
+
+function formNext(){
+  if(fStep===TOTAL_STEPS-1){sendWhatsApp();return;}
+  setFormStep(fStep+1);
+  document.getElementById('fmodal-inner').scrollTo({top:0,behavior:'smooth'});
+}
+
+function formBack(){
+  if(fStep>0){setFormStep(fStep-1);document.getElementById('fmodal-inner').scrollTo({top:0,behavior:'smooth'});}
+}
+
+function buildSummary(){
+  const fi=FORM_I18N[lang]||FORM_I18N.es;
+  const arrival=document.getElementById('fi-arrival').value;
+  const nights=document.getElementById('fi-nights').value;
+  const name=document.getElementById('fi-name').value.trim();
+  const where=document.getElementById('fi-where').value.trim();
+  const car=document.getElementById('fi-car').value;
+  const notes=document.getElementById('fi-notes').value.trim();
+  const selList=FORM_ACTIVITIES.filter(a=>fSelActs.has(a.id));
+  const tagsHtml=selList.map(a=>'<div class="sum-act-tag"><img src="'+a.logo+'" alt="'+a.name+'">'+a.name+'</div>').join('');
+  const rows=[
+    [fi.sum_acts,'<div class="sum-acts" style="margin-top:0">'+tagsHtml+'</div>',true],
+    [fi.sum_arr,arrival||fi.no_sel],
+    [fi.sum_nights,nights||fi.no_sel],
+    [fi.sum_pax,fPax+' '+fi.pax_lbl],
+    [fi.sum_name,name||fi.no_sel],
+    [fi.sum_where,where||fi.no_sel],
+    [fi.sum_car,car||fi.no_sel],
+  ];
+  if(notes)rows.push([fi.sum_notes,notes]);
+  const rowsHtml=rows.map(([k,v,raw])=>raw?'<div class="sum-row" style="flex-direction:column;align-items:flex-start;gap:8px"><span class="sum-key">'+k+'</span>'+v+'</div>':'<div class="sum-row"><span class="sum-key">'+k+'</span><span class="sum-val">'+v+'</span></div>').join('');
+  document.getElementById('summary-content').innerHTML='<div class="summary-title">Solicitud MallorcasLocal</div>'+rowsHtml;
+  document.getElementById('fm-sum-note').textContent=fi.sum_note;
+}
+
+function sendWhatsApp(){
+  const fi=FORM_I18N[lang]||FORM_I18N.es;
+  const arrival=document.getElementById('fi-arrival').value;
+  const nights=document.getElementById('fi-nights').value;
+  const name=document.getElementById('fi-name').value.trim();
+  const where=document.getElementById('fi-where').value.trim();
+  const car=document.getElementById('fi-car').value;
+  const notes=document.getElementById('fi-notes').value.trim();
+  const selNames=FORM_ACTIVITIES.filter(a=>fSelActs.has(a.id)).map(a=>a.name);
+  let msg=fi.wa_intro+'
+
+';
+  msg+='*'+fi.sum_acts+':*
+';
+  selNames.forEach(n=>msg+='  - '+n+'
+');
+  msg+='
+';
+  if(arrival)msg+='*'+fi.sum_arr+':* '+arrival+'
+';
+  if(nights)msg+='*'+fi.sum_nights+':* '+nights+'
+';
+  msg+='*'+fi.sum_pax+':* '+fPax+' '+fi.pax_lbl+'
+';
+  if(name)msg+='*'+fi.sum_name+':* '+name+'
+';
+  if(where)msg+='*'+fi.sum_where+':* '+where+'
+';
+  if(car)msg+='*'+fi.sum_car+':* '+car+'
+';
+  if(notes)msg+='*'+fi.sum_notes+':* '+notes+'
+';
+  const url='https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(msg);
+  closeForm();
+  setTimeout(()=>window.open(url,'_blank'),350);
+}
+
+function refreshFormTexts(fi){
+  const ids=[['fm-title','title'],['fl-act','fl_act'],['fq-act','fq_act'],['fm-sel-hint','hint'],['fl-date','fl_date'],['fq-date','fq_date'],['fl-arrival','fl_arrival'],['fl-nights','fl_nights'],['fl-pax','fl_pax'],['fl-contact','fl_contact'],['fq-contact','fq_contact'],['fl-name','fl_name'],['fl-where','fl_where'],['fl-car','fl_car'],['fl-notes','fl_notes'],['fl-sum','fl_sum'],['fq-sum','fq_sum'],['fm-note','fm_note'],['fm-sum-note','sum_note']];
+  ids.forEach(([id,k])=>{const el=document.getElementById(id);if(el&&fi[k])el.textContent=fi[k];});
+  document.getElementById('fab-label').textContent=fi.fab;
+  const ns=document.getElementById('fi-nights');
+  const cv=ns.value;
+  ns.innerHTML=fi.nights_opts.map((o,i)=>'<option value="'+(i===0?'':o)+'"'+(cv===o?' selected':'')+'>'+o+'</option>').join('');
+  const cs=document.getElementById('fi-car');
+  const cc=cs.value;
+  cs.innerHTML=fi.car_opts.map((o,i)=>'<option value="'+(i===0?'':o)+'"'+(cc===o?' selected':'')+'>'+o+'</option>').join('');
+  if(fStep===TOTAL_STEPS-1)buildSummary();
+  const back=document.getElementById('fm-back-btn');
+  if(back.style.display!=='none')back.textContent=fi.back;
+  const next=document.getElementById('fm-next-btn');
+  if(fStep===TOTAL_STEPS-1)next.textContent=fi.send;
+  else next.textContent=fi.next;
+}
+
+function openForm(){
+  const fi=FORM_I18N[lang]||FORM_I18N.es;
+  refreshFormTexts(fi);
+  buildActGrid();
+  fStep=0;setFormStep(0);
+  document.getElementById('fmo').classList.add('show');
+  document.getElementById('fmodal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeForm(){
+  document.getElementById('fmo').classList.remove('show');
+  document.getElementById('fmodal').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+// patch setLang to refresh form if open
+const _origSetLang=setLang;
+setLang=function(l){
+  _origSetLang(l);
+  const fi=FORM_I18N[l]||FORM_I18N.es;
+  document.getElementById('fab-label').textContent=fi.fab;
+  if(document.getElementById('fmodal').classList.contains('open'))refreshFormTexts(fi);
+};
 </script>
 </body>
 </html>
