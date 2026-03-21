@@ -172,41 +172,54 @@ button { font-family:var(--ff); cursor:pointer; border:none; background:none; }
 /* ─── LOGO CIRCLE ─── */
 .exp-icon-wrap,
 .nl-icon {
-  width:48px; height:48px; border-radius:50%;
+  width:40px; height:40px; border-radius:50%;
   background:#111; border:1px solid #2a2a2a;
   display:flex; align-items:center; justify-content:center;
   overflow:hidden; flex-shrink:0;
-  transition:transform var(--ease), border-color var(--ease);
+  transition:transform var(--ease), border-color var(--ease), box-shadow var(--ease);
 }
+.nl-icon { width:44px; height:44px; }
 .exp-icon-wrap img,
 .nl-icon img {
-  width:70%; height:70%; object-fit:contain;
+  width:65%; height:65%; object-fit:contain;
   filter:brightness(0) invert(1);
 }
 .exp-card:hover .exp-icon-wrap,
 .nl-row:hover .nl-icon {
-  transform:scale(1.08);
-  border-color:#444;
+  transform:scale(1.06);
+  border-color:#555;
 }
 
 /* ─── CAT BAR ─── */
 .cat-bar {
   position:sticky; top:52px; z-index:800;
   background:var(--bg); border-bottom:1px solid var(--line);
-  display:flex; align-items:center; padding:0 20px;
+  display:flex; align-items:center; padding:0 20px; gap:8px;
   overflow-x:auto; scrollbar-width:none;
   transition:background var(--ease), border-color var(--ease);
 }
 .cat-bar::-webkit-scrollbar { display:none; }
 .cat-tab {
-  padding:14px 16px; font-size:13px; font-weight:500; color:var(--text2);
+  display:flex; align-items:center; gap:8px;
+  padding:10px 16px; font-size:13px; font-weight:500; color:var(--text2);
   white-space:nowrap; cursor:pointer;
-  border-bottom:2px solid transparent;
-  transition:color var(--ease), border-color var(--ease);
+  border-radius:999px;
+  background:var(--bg2);
+  border:1px solid var(--line);
+  transition:color var(--ease), background var(--ease), border-color var(--ease);
   flex-shrink:0;
+  margin:10px 0;
 }
-.cat-tab:hover { color:var(--text); }
-.cat-tab.on { color:var(--text); border-bottom-color:var(--text); font-weight:700; }
+.cat-tab img {
+  width:16px; height:16px; object-fit:contain;
+  filter:brightness(0) invert(0.5);
+  transition:filter var(--ease);
+}
+.cat-tab:hover { color:var(--text); background:var(--bg3); border-color:var(--line2); }
+.cat-tab:hover img { filter:brightness(0) invert(0.85); }
+.cat-tab.on { background:var(--text); color:var(--bg); font-weight:700; border-color:var(--text); }
+.cat-tab.on img { filter:brightness(0) invert(0); }
+body.light .cat-tab.on img { filter:brightness(0) invert(1); }
 
 /* ─── SECTION ─── */
 .section { max-width:1100px; margin:0 auto; padding:52px 20px; border-bottom:1px solid var(--line); }
@@ -222,21 +235,21 @@ button { font-family:var(--ff); cursor:pointer; border:none; background:none; }
 }
 .spots-scroll::-webkit-scrollbar { display:none; }
 .spot-card {
-  flex-shrink:0; width:160px;
+  flex-shrink:0; width:140px;
   background:var(--surface); border:1px solid var(--line);
-  border-radius:var(--r12); padding:18px 16px;
-  display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center;
+  border-radius:var(--r12); padding:14px 12px;
+  display:flex; flex-direction:column; align-items:center; gap:10px; text-align:center;
   cursor:pointer;
   transition:background var(--ease), border-color var(--ease), transform var(--ease);
 }
 .spot-card:hover { background:var(--bg2); border-color:var(--line2); transform:translateY(-2px); }
 .spot-logo {
-  width:52px; height:52px; border-radius:50%;
-  background:#111; border:1px solid #2a2a2a;
+  width:44px; height:44px; border-radius:50%;
+  background:#111; border:1px solid #2e2e2e;
   display:flex; align-items:center; justify-content:center;
   overflow:hidden;
 }
-.spot-logo img { width:70%; height:70%; object-fit:contain; filter:brightness(0) invert(1); }
+.spot-logo img { width:65%; height:65%; object-fit:contain; filter:brightness(0) invert(1); }
 .spot-name { font-size:13px; font-weight:700; letter-spacing:-0.02em; }
 .spot-cat { font-size:11px; color:var(--text3); }
 .spot-badge {
@@ -249,18 +262,18 @@ button { font-family:var(--ff); cursor:pointer; border:none; background:none; }
 
 /* ─── CARDS GRID ─── */
 .cards-grid {
-  display:grid; grid-template-columns:repeat(auto-fill, minmax(290px,1fr));
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(260px,1fr));
   gap:1px; background:var(--line);
   border:1px solid var(--line); border-radius:var(--r12); overflow:hidden;
 }
 .exp-card {
-  background:var(--surface); padding:24px;
+  background:var(--surface); padding:18px;
   display:flex; flex-direction:column;
   transition:background var(--ease);
   position:relative;
 }
 .exp-card:hover { background:var(--bg2); }
-.exp-top { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:16px; }
+.exp-top { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:12px; }
 .exp-badge {
   padding:3px 8px; border-radius:var(--rmax);
   font-size:10px; font-weight:700; letter-spacing:0.05em; text-transform:uppercase;
@@ -269,19 +282,19 @@ button { font-family:var(--ff); cursor:pointer; border:none; background:none; }
 .badge-wa   { background:var(--adim); color:var(--amber); }
 .badge-seasonal { background:var(--rdim); color:var(--red); }
 
-.exp-name { font-size:16px; font-weight:800; letter-spacing:-0.025em; color:var(--text); margin-bottom:6px; }
-.exp-desc { font-size:13px; color:var(--text2); line-height:1.65; margin-bottom:16px; flex:1; }
-.exp-micro { font-size:11px; color:var(--text3); margin-top:-10px; margin-bottom:16px; font-weight:500; }
+.exp-name { font-size:15px; font-weight:800; letter-spacing:-0.025em; color:var(--text); margin-bottom:4px; }
+.exp-desc { font-size:12px; color:var(--text2); line-height:1.55; margin-bottom:10px; flex:1; }
+.exp-micro { font-size:10px; color:var(--text3); margin-top:-6px; margin-bottom:10px; font-weight:500; }
 
-.price-tag { display:inline-flex; align-items:baseline; gap:2px; margin-bottom:16px; }
-.p-from { font-size:11px; color:var(--text3); margin-right:2px; }
-.p-num  { font-size:22px; font-weight:900; letter-spacing:-0.05em; color:var(--text); }
-.p-unit { font-size:12px; color:var(--text3); }
+.price-tag { display:inline-flex; align-items:baseline; gap:2px; margin-bottom:10px; }
+.p-from { font-size:10px; color:var(--text3); margin-right:2px; }
+.p-num  { font-size:20px; font-weight:900; letter-spacing:-0.05em; color:var(--text); }
+.p-unit { font-size:11px; color:var(--text3); }
 
 .exp-specs {
-  display:flex; flex-direction:column; gap:6px;
-  padding:12px 14px; background:var(--bg2); border-radius:var(--r8);
-  border:1px solid var(--line); margin-bottom:18px;
+  display:flex; flex-direction:column; gap:4px;
+  padding:10px 12px; background:var(--bg2); border-radius:var(--r8);
+  border:1px solid var(--line); margin-bottom:12px;
   transition:background var(--ease), border-color var(--ease);
 }
 .exp-card:hover .exp-specs { background:var(--bg3); border-color:var(--line2); }
@@ -299,20 +312,20 @@ button { font-family:var(--ff); cursor:pointer; border:none; background:none; }
 }
 .nl-row {
   background:var(--surface); display:flex; align-items:center;
-  padding:18px 22px; gap:18px;
+  padding:14px 18px; gap:14px;
   transition:background var(--ease);
 }
 .nl-row:hover { background:var(--bg2); }
-.nl-num { font-size:11px; font-weight:700; color:var(--text3); letter-spacing:0.04em; width:20px; flex-shrink:0; }
+.nl-num { font-size:10px; font-weight:700; color:var(--text3); letter-spacing:0.04em; width:18px; flex-shrink:0; }
 .nl-info { flex:1; min-width:0; }
-.nl-name { font-size:15px; font-weight:800; letter-spacing:-0.025em; margin-bottom:4px; }
-.nl-meta { display:flex; gap:10px; flex-wrap:wrap; }
-.nl-meta span { font-size:12px; color:var(--text2); }
-.nl-meta span+span::before { content:'·'; margin-right:10px; color:var(--text3); }
-.nl-right { display:flex; align-items:center; gap:10px; flex-shrink:0; }
+.nl-name { font-size:14px; font-weight:800; letter-spacing:-0.025em; margin-bottom:3px; }
+.nl-meta { display:flex; gap:8px; flex-wrap:wrap; }
+.nl-meta span { font-size:11px; color:var(--text2); }
+.nl-meta span+span::before { content:'·'; margin-right:8px; color:var(--text3); }
+.nl-right { display:flex; align-items:center; gap:8px; flex-shrink:0; }
 .nl-price { text-align:right; }
-.nl-price .from { font-size:10px; color:var(--text3); display:block; font-weight:500; }
-.nl-price .amount { font-size:18px; font-weight:900; letter-spacing:-0.04em; }
+.nl-price .from { font-size:9px; color:var(--text3); display:block; font-weight:500; }
+.nl-price .amount { font-size:16px; font-weight:900; letter-spacing:-0.04em; }
 
 /* ─── INFO STRIP ─── */
 .info-strip {
@@ -398,8 +411,8 @@ button { font-family:var(--ff); cursor:pointer; border:none; background:none; }
 .drawer.show { transform:translateY(0); }
 .d-handle { width:36px; height:4px; border-radius:2px; background:var(--line2); margin:14px auto 0; }
 .d-head { padding:18px 22px 0; display:flex; align-items:flex-start; justify-content:space-between; gap:14px; }
-.d-logo { width:54px; height:54px; border-radius:50%; background:#111; border:1px solid #2a2a2a; display:flex; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0; }
-.d-logo img { width:70%; height:70%; object-fit:contain; filter:brightness(0) invert(1); }
+.d-logo { width:64px; height:64px; border-radius:50%; background:#111; border:1.5px solid #333; display:flex; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0; box-shadow: 0 0 0 4px rgba(255,255,255,0.03); }
+.d-logo img { width:68%; height:68%; object-fit:contain; filter:brightness(0) invert(1); transition:transform 0.3s ease; }
 body.light .d-logo { background:#e8e8e8; border-color:#ccc; }
 body.light .d-logo img { filter:brightness(0); }
 .d-close { width:30px; height:30px; border-radius:50%; background:var(--bg2); color:var(--text2); display:flex; align-items:center; justify-content:center; font-size:18px; cursor:pointer; flex-shrink:0; transition:background var(--ease); }
@@ -451,6 +464,25 @@ footer p { font-size:12px; color:var(--text3); }
   .d-specs { grid-template-columns:1fr; }
   .topbar { padding:0 14px; }
   .lb { padding:3px 7px; font-size:10px; }
+}
+
+
+/* image fade-in */
+.exp-icon-wrap img, .nl-icon img, .spot-logo img, .d-logo img, .ac-logo img, .sum-act-tag img {
+  transition: opacity 0.3s ease, filter 0.2s ease;
+}
+.exp-icon-wrap img[src=""], .nl-icon img[src=""] { opacity: 0; }
+
+
+.exp-card:hover .exp-icon-wrap img,
+.nl-row:hover .nl-icon img,
+.spot-card:hover .spot-logo img {
+  filter: brightness(0) invert(1) drop-shadow(0 0 6px rgba(255,255,255,0.15));
+}
+body.light .exp-card:hover .exp-icon-wrap img,
+body.light .nl-row:hover .nl-icon img,
+body.light .spot-card:hover .spot-logo img {
+  filter: brightness(0) drop-shadow(0 0 4px rgba(0,0,0,0.2));
 }
 
 /* WA SVG snippet */
@@ -544,8 +576,8 @@ svg.wa-ico { width:14px; height:14px; flex-shrink:0; }
   border-color:rgba(37,211,102,0.45);
 }
 .ac-logo {
-  width:34px; height:34px; border-radius:50%;
-  background:#111; border:1px solid #2a2a2a;
+  width:38px; height:38px; border-radius:50%;
+  background:#111; border:1px solid #2e2e2e;
   display:flex; align-items:center; justify-content:center;
   overflow:hidden; flex-shrink:0;
 }
@@ -641,7 +673,7 @@ body.light .sum-act-tag img { filter:brightness(0); background:#e8e8e8; }
   <div class="hero-row">
     <p class="hero-p" data-i18n="hdesc">Actividades, boats, playas y nightlife. Reserva directamente o contacta con nuestro equipo para tickets y acceso especial.</p>
     <div class="hero-acts">
-      <a href="https://wa.me/message/mallorcaslocal" class="btn-primary">
+      <a href="https://wa.me/34644075065" class="btn-primary">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         <span data-i18n="hw">Hablar con un local</span>
       </a>
@@ -653,11 +685,11 @@ body.light .sum-act-tag img { filter:brightness(0); background:#e8e8e8; }
 
 <!-- ═══════════ CAT TABS ═══════════ -->
 <div class="cat-bar">
-  <div class="cat-tab on"  onclick="showCat('water',this)" data-i18n="c_water">Agua</div>
-  <div class="cat-tab"     onclick="showCat('night',this)" data-i18n="c_night">Nightlife</div>
-  <div class="cat-tab"     onclick="showCat('beach',this)" data-i18n="c_beach">Playa & Día</div>
-  <div class="cat-tab"     onclick="showCat('spots',this)" data-i18n="c_spots">Top Spots</div>
-  <div class="cat-tab"     onclick="showCat('faq',this)"   data-i18n="c_faq">FAQ</div>
+  <div class="cat-tab on"  onclick="showCat('water',this)"><img src="https://res.cloudinary.com/dxhef6dju/image/upload/v1774107976/5_d0638s.png" alt=""><span data-i18n="c_water">Agua</span></div>
+  <div class="cat-tab"     onclick="showCat('night',this)"><img src="https://res.cloudinary.com/dxhef6dju/image/upload/v1774107977/4_ykfzz0.png" alt=""><span data-i18n="c_night">Nightlife</span></div>
+  <div class="cat-tab"     onclick="showCat('beach',this)"><img src="https://res.cloudinary.com/dxhef6dju/image/upload/v1774107981/7_iqxwno.png" alt=""><span data-i18n="c_beach">Playa & Día</span></div>
+  <div class="cat-tab"     onclick="showCat('spots',this)"><img src="https://res.cloudinary.com/dxhef6dju/image/upload/v1774107978/9_l7ileb.png" alt=""><span data-i18n="c_spots">Top Spots</span></div>
+  <div class="cat-tab"     onclick="showCat('faq',this)"><span>❓</span><span data-i18n="c_faq">FAQ</span></div>
 </div>
 
 <!-- ═══════════ WATER ═══════════ -->
@@ -769,7 +801,7 @@ body.light .sum-act-tag img { filter:brightness(0); background:#e8e8e8; }
   <div class="nl-list rv">
 
     <!-- BCM -->
-    <div class="nl-row">
+    <div class="nl-row" onclick="trackClick('BCM Mallorca'); window.open('https://share.google/dNsKDI6ZdhNX5brHf','_blank')" style="cursor:pointer">
       <div class="nl-num">01</div>
       <div class="nl-icon"><img src="https://res.cloudinary.com/dxhef6dju/image/upload/v1774107967/3_x798fx.png" alt="BCM"></div>
       <div class="nl-info">
@@ -789,7 +821,7 @@ body.light .sum-act-tag img { filter:brightness(0); background:#e8e8e8; }
     </div>
 
     <!-- SOCIAL CLUB -->
-    <div class="nl-row">
+    <div class="nl-row" onclick="trackClick('Social Club'); window.open('https://share.google/aaeGslSna4BAt35EN','_blank')" style="cursor:pointer">
       <div class="nl-num">02</div>
       <div class="nl-icon"><img src="https://res.cloudinary.com/dxhef6dju/image/upload/v1774107967/2_dwvgdf.png" alt="Social Club"></div>
       <div class="nl-info">
@@ -841,7 +873,7 @@ body.light .sum-act-tag img { filter:brightness(0); background:#e8e8e8; }
     </div>
 
     <!-- MY LOUNGE -->
-    <div class="nl-row">
+    <div class="nl-row" onclick="trackClick('My Lounge'); window.open('https://share.google/oComgJX7jHdA4N8qx','_blank')" style="cursor:pointer">
       <div class="nl-num">05</div>
       <div class="nl-icon"><img src="https://res.cloudinary.com/dxhef6dju/image/upload/v1774108435/MY_LIUNGE_BAR_LOGO_p7aa5j.png" alt="My Lounge"></div>
       <div class="nl-info">
@@ -1051,7 +1083,7 @@ body.light .sum-act-tag img { filter:brightness(0); background:#e8e8e8; }
       <p data-i18n="cta_d">¿No sabes por dónde empezar? Escríbenos y te preparamos un plan completo según tus días, ubicación y preferencias. Sin coste.</p>
     </div>
     <div class="cta-acts">
-      <a href="https://wa.me/message/mallorcaslocal" class="btn-primary">
+      <a href="https://wa.me/34644075065" class="btn-primary">
         <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         <span data-i18n="cta_wb">Escribir en WhatsApp</span>
       </a>
@@ -1204,6 +1236,20 @@ body.light .sum-act-tag img { filter:brightness(0); background:#e8e8e8; }
 </div>
 
 <script>
+/* ═══ TRACKING ═══ */
+function trackClick(name){
+  console.log("CLICK:", name, new Date().toISOString());
+  // Future: Google Analytics, CRM, WhatsApp leads
+  if(typeof gtag === 'function') gtag('event', 'venue_click', { venue_name: name });
+}
+
+/* ═══ STOP PROPAGATION on buttons/links inside nl-rows ═══ */
+document.addEventListener('DOMContentLoaded', function(){
+  document.querySelectorAll('.nl-row .btn-book, .nl-row .btn-info, .nl-row a').forEach(function(el){
+    el.addEventListener('click', function(e){ e.stopPropagation(); });
+  });
+});
+
 /* ═══ LOGOS ═══ */
 const LOGOS = {
   water:   'https://res.cloudinary.com/dxhef6dju/image/upload/v1774107976/5_d0638s.png',
@@ -1335,6 +1381,7 @@ const WA_SVG = `<svg class="wa-ico" viewBox="0 0 24 24" fill="currentColor" styl
 
 function openDrawer(id){
   activeExp=id; qty=2;
+  trackClick(NAMES[id] || id);
   const exp=EXP[id];
   const t=T[lang];
   // logo
@@ -1360,7 +1407,7 @@ function openDrawer(id){
   const ctas=document.getElementById('d-ctas');
   let mapBtn = exp.mapUrl ? `<a href="${exp.mapUrl}" target="_blank" class="btn-book" style="background:var(--bg2);color:var(--text);border:1px solid var(--line2);">📍 ${lang==='es'?'Ver ubicación':lang==='en'?'View location':lang==='fr'?'Voir l\'adresse':lang==='de'?'Standort':' Posizione'}</a>` : '';
   if(exp.type==='wa'){
-    ctas.innerHTML=`${mapBtn}<a href="https://wa.me/message/mallorcaslocal" class="btn-book wa">${WA_SVG} ${T[lang].bt_tickets||'Pedir tickets / Reservar'}</a>`;
+    ctas.innerHTML=`${mapBtn}<a href="https://wa.me/34644075065" class="btn-book wa">${WA_SVG} ${T[lang].bt_tickets||'Pedir tickets / Reservar'}</a>`;
     document.getElementById('d-note').textContent = lang==='es'?'Nuestro equipo confirma disponibilidad y precio en menos de 1h.':lang==='en'?'Our team confirms availability and price in under 1 hour.':lang==='fr'?'Notre équipe confirme en moins d\'1h.':lang==='de'?'Unser Team bestätigt in unter 1 Stunde.':'Il nostro team conferma in meno di 1 ora.';
   } else {
     ctas.innerHTML=`${mapBtn}<button class="btn-book" onclick="confirmBook()">${T[lang].bt_res||'Reservar →'}</button>`;
@@ -1387,9 +1434,10 @@ function updateTotal(){
   document.getElementById('total-p').textContent=tot+'€';
 }
 function confirmBook(){
+  trackClick('BOOK:' + (NAMES[activeExp] || activeExp));
   closeDrawer();
   showToast(lang==='es'?'✓ Redirigiendo a WhatsApp..':lang==='en'?'✓ Redirecting to WhatsApp..':lang==='fr'?'✓ Redirection WhatsApp..':lang==='de'?'✓ Weiterleitung WhatsApp..':'✓ Reindirizzamento WhatsApp..');
-  setTimeout(()=>window.open('https://wa.me/message/mallorcaslocal','_blank'),600);
+  setTimeout(()=>window.open('https://wa.me/34644075065','_blank'),600);
 }
 function showToast(msg){
   const t=document.getElementById('toast');
@@ -1531,6 +1579,7 @@ function buildSummary(){
 
 function sendWhatsApp(){
   const fi=FORM_I18N[lang]||FORM_I18N.es;
+  trackClick('FORM_SEND:' + Array.from(fSelActs).join(','));
   const arrival=document.getElementById('fi-arrival').value;
   const nights=document.getElementById('fi-nights').value;
   const name=document.getElementById('fi-name').value.trim();
@@ -1538,29 +1587,17 @@ function sendWhatsApp(){
   const car=document.getElementById('fi-car').value;
   const notes=document.getElementById('fi-notes').value.trim();
   const selNames=FORM_ACTIVITIES.filter(a=>fSelActs.has(a.id)).map(a=>a.name);
-  let msg=fi.wa_intro+'
-
-';
-  msg+='*'+fi.sum_acts+':*
-';
-  selNames.forEach(n=>msg+='  - '+n+'
-');
-  msg+='
-';
-  if(arrival)msg+='*'+fi.sum_arr+':* '+arrival+'
-';
-  if(nights)msg+='*'+fi.sum_nights+':* '+nights+'
-';
-  msg+='*'+fi.sum_pax+':* '+fPax+' '+fi.pax_lbl+'
-';
-  if(name)msg+='*'+fi.sum_name+':* '+name+'
-';
-  if(where)msg+='*'+fi.sum_where+':* '+where+'
-';
-  if(car)msg+='*'+fi.sum_car+':* '+car+'
-';
-  if(notes)msg+='*'+fi.sum_notes+':* '+notes+'
-';
+  let msg=fi.wa_intro+'\n\n';
+  msg+='*'+fi.sum_acts+':*\n';
+  selNames.forEach(n=>msg+='  - '+n+'\n');
+  msg+='\n';
+  if(arrival)msg+='*'+fi.sum_arr+':* '+arrival+'\n';
+  if(nights)msg+='*'+fi.sum_nights+':* '+nights+'\n';
+  msg+='*'+fi.sum_pax+':* '+fPax+' '+fi.pax_lbl+'\n';
+  if(name)msg+='*'+fi.sum_name+':* '+name+'\n';
+  if(where)msg+='*'+fi.sum_where+':* '+where+'\n';
+  if(car)msg+='*'+fi.sum_car+':* '+car+'\n';
+  if(notes)msg+='*'+fi.sum_notes+':* '+notes+'\n';
   const url='https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(msg);
   closeForm();
   setTimeout(()=>window.open(url,'_blank'),350);
@@ -1599,6 +1636,15 @@ function closeForm(){
   document.getElementById('fmodal').classList.remove('open');
   document.body.style.overflow='';
 }
+
+
+/* ═══ IMAGE HANDLING ═══ */
+document.querySelectorAll('img[src*="cloudinary"]').forEach(img => {
+  img.setAttribute('loading', 'lazy');
+  img.onerror = function() {
+    this.style.opacity = '0';
+  };
+});
 
 // patch setLang to refresh form if open
 const _origSetLang=setLang;
