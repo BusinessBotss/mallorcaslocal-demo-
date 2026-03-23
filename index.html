@@ -440,6 +440,55 @@ body.light .d-logo img { filter:brightness(0); }
 .d-ctas .btn-book { width:100%; padding:14px; font-size:14px; font-weight:800; }
 .d-note { font-size:11px; color:var(--text3); text-align:center; margin:12px 22px 0; line-height:1.6; }
 
+/* ─── IMAGE SCROLL CARDS (Top Experiencias) ─── */
+.img-scroll-sec { padding:52px 0 52px; max-width:1100px; margin:0 auto; }
+.img-scroll-head { padding:0 20px; margin-bottom:32px; text-align:center; }
+.img-scroll-tag { font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--amber); margin-bottom:12px; }
+.img-scroll-title { font-size:clamp(24px,4vw,38px); font-weight:800; letter-spacing:-0.04em; color:var(--text); line-height:1.1; }
+.img-scroll-sub { font-size:12px; color:var(--text3); margin-top:10px; letter-spacing:0.04em; text-transform:uppercase; font-weight:500; }
+.img-scroll {
+  display:flex; gap:14px; overflow-x:auto; scrollbar-width:none;
+  padding:0 20px 8px; scroll-snap-type:x mandatory;
+}
+.img-scroll::-webkit-scrollbar { display:none; }
+.img-card {
+  flex-shrink:0; width:260px; height:360px;
+  border-radius:var(--r16); overflow:hidden;
+  position:relative; cursor:pointer;
+  scroll-snap-align:start;
+  transition:transform var(--ease);
+}
+.img-card:hover { transform:translateY(-3px); }
+.img-card img {
+  width:100%; height:100%; object-fit:cover;
+  transition:transform 0.4s ease;
+}
+.img-card:hover img { transform:scale(1.05); }
+.img-card-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(0deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.25) 100%);
+  display:flex; flex-direction:column; justify-content:flex-end;
+  padding:20px;
+}
+.img-card-badge {
+  position:absolute; top:16px; left:16px;
+  padding:4px 10px; border-radius:var(--rmax);
+  font-size:9px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase;
+  background:rgba(245,166,35,0.2); color:#f5a623;
+  backdrop-filter:blur(8px); border:1px solid rgba(245,166,35,0.15);
+}
+.img-card-badge.green { background:rgba(29,185,84,0.2); color:#1db954; border-color:rgba(29,185,84,0.15); }
+.img-card-badge.red { background:rgba(232,69,60,0.2); color:#e8453c; border-color:rgba(232,69,60,0.15); }
+.img-card-name {
+  font-size:17px; font-weight:800; letter-spacing:-0.02em;
+  color:#fff; margin-bottom:4px;
+}
+.img-card-meta { font-size:11px; color:rgba(255,255,255,0.6); font-weight:500; }
+@media(max-width:640px){
+  .img-card { width:220px; height:300px; }
+  .img-card-name { font-size:15px; }
+}
+
 /* ─── FOOTER ─── */
 footer { border-top:1px solid var(--line); padding:28px 20px; max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; }
 footer p { font-size:12px; color:var(--text3); }
@@ -1255,14 +1304,17 @@ document.addEventListener('DOMContentLoaded', function(){
 
 /* ═══ LOGOS ═══ */
 const LOGOS = {
-  water:   'https://res.cloudinary.com/dxhef6dju/image/upload/v1774107976/5_d0638s.png',
-  charter: 'https://res.cloudinary.com/dxhef6dju/image/upload/v1774107984/8_mcruij.png',
-  beach:   'https://res.cloudinary.com/dxhef6dju/image/upload/v1774107981/7_iqxwno.png',
-  food:    'https://res.cloudinary.com/dxhef6dju/image/upload/v1774107978/9_l7ileb.png',
-  bcm:     'https://res.cloudinary.com/dxhef6dju/image/upload/v1774107967/3_x798fx.png',
-  mcp:     'https://res.cloudinary.com/dxhef6dju/image/upload/v1774107966/1_scfycp.png',
-  social:  'https://res.cloudinary.com/dxhef6dju/image/upload/v1774107967/2_dwvgdf.png',
-  lounge:  'https://res.cloudinary.com/dxhef6dju/image/upload/v1774108435/MY_LIUNGE_BAR_LOGO_p7aa5j.png',
+  water:     'https://res.cloudinary.com/dxhef6dju/image/upload/v1774107976/5_d0638s.png',
+  charter:   'https://res.cloudinary.com/dxhef6dju/image/upload/v1774107984/8_mcruij.png',
+  beach:     'https://res.cloudinary.com/dxhef6dju/image/upload/v1774107981/7_iqxwno.png',
+  food:      'https://res.cloudinary.com/dxhef6dju/image/upload/v1774107978/9_l7ileb.png',
+  bcm:       'https://res.cloudinary.com/dxhef6dju/image/upload/v1774107967/3_x798fx.png',
+  mcp:       'https://res.cloudinary.com/dxhef6dju/image/upload/v1774107966/1_scfycp.png',
+  social:    'https://res.cloudinary.com/dxhef6dju/image/upload/v1774107967/2_dwvgdf.png',
+  lounge:    'https://res.cloudinary.com/dxhef6dju/image/upload/v1774108435/MY_LIUNGE_BAR_LOGO_p7aa5j.png',
+  nightlife: 'https://res.cloudinary.com/dxhef6dju/image/upload/v1774107977/4_ykfzz0.png',
+  lounge_cat:'https://res.cloudinary.com/dxhef6dju/image/upload/v1774107980/10_gojczo.png',
+  boats:     'https://res.cloudinary.com/dxhef6dju/image/upload/v1774102775/5b58b2c3-4cd2-4f57-97c5-dcc65a9fe5b2_xggars.jpg',
 };
 
 /* ═══ EXPERIENCE DATA ═══ */
